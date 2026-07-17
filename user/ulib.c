@@ -111,7 +111,8 @@ atoi(const char *s)
 
 void *
 memmove(void *vdst, const void *vsrc, int n)
-{
+{//n is the number of bytes not the number of elements, you are doing a reinterpret cast 
+  //because dst and src are char*
   char *dst;
   const char *src;
 
