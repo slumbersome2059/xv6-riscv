@@ -504,3 +504,9 @@ sys_pipe(void)
   }
   return 0;
 }
+
+uint64
+sys_memAvailable(void)
+{
+  return count_free_bytes();
+}

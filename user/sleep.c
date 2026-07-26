@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
         }
         if(pause(sleepTime)!= 0){
             fprintf(2, "Error in pause sys-call");
-        }
+        }        
     }
     return 0;
 }
