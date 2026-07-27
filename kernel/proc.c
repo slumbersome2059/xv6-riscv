@@ -55,6 +55,8 @@ procinit(void)
     initlock(&p->lock, "proc");
     p->state = UNUSED;
     p->kstack = KSTACK((int)(p - proc));
+    p->procMaskSC = ~(0);
+    //p->pathName[0] = '\0';
   }
 }
 
@@ -145,7 +147,8 @@ found:
   memset(&p->context, 0, sizeof(p->context));
   p->context.ra = (uint64)forkret;
   p->context.sp = p->kstack + PGSIZE;
-
+  p->procMaskSC = ~(0);
+  //p->pathName[0] = '\0';
   return p;
 }
 
@@ -169,6 +172,8 @@ freeproc(struct proc *p)
   p->killed = 0;
   p->xstate = 0;
   p->state = UNUSED;
+  p->procMaskSC = 0;
+  p->pathName[0] = '\0';
 }
 
 // Create a user page table for a given process, with no user memory,
@@ -300,6 +305,11 @@ kfork(void)
 
   acquire(&np->lock);
   np->state = RUNNABLE;
+  release(&np->lock);
+
+  acquire(&np->lock);
+  np->procMaskSC = p->procMaskSC;
+  memmove(np->pathName, p->pathName, MAXPATH);
   release(&np->lock);
 
   return pid;

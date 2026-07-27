@@ -510,3 +510,19 @@ sys_memAvailable(void)
 {
   return count_free_bytes();
 }
+
+uint64
+sys_interpose(){
+  int bitMask;
+  char pathName[MAXPATH];
+  argint(0, &bitMask);
+  argstr(1, pathName, MAXPATH);
+  struct proc* p = myproc();
+  if(p == 0){
+    return -1;
+  }else{
+    p->procMaskSC = ~bitMask;
+    memmove(p->pathName, pathName, MAXPATH);
+    return 0;
+  }
+}

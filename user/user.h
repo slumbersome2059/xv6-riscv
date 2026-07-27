@@ -25,6 +25,7 @@ char *sys_sbrk(int, int);
 int pause(int);
 int uptime(void);
 uint64 memAvailable(void);
+uint64 interpose(int bitMask, char* pathName);
 
 // ulib.c
 int stat(const char *, struct stat *);
