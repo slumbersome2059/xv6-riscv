@@ -150,6 +150,8 @@ UPROGS=\
 	$U/_memdump\
 	$U/_find\
 	$U/_sandbox\
+	$U/_secret\
+	$U/_attack\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
