@@ -1,6 +1,58 @@
 # README
 ## My Additions
 ### Unix Utilities
+I learnt about various system calls used in Unix and applied them in the following practicals
+
+**Sixfive**
+- Files: sixfive.c
+- Used read and open system calls
+- When doing this I learnt about the importance of fds and how they can be useful in redirection of input and output files
+
+**Memdump**
+- Files: memdump.c
+- Printed contents in memory according to format string given
+
+**find**
+- Files: find.c
+- Learned about how directory structures work and how they can be accessed to 
+- Learned to use fstat system call
+- Hit a bug of recursing into the . directory itself
+
+**exec option on find**
+- Files: find.c
+- Learned to use fork, wait and exec system calls
+- Made the error of not wrapping some exec calls with if statements checking if they produced errors or not and sufferred a lot of bugs due to this
+
+**pingpong**
+- Files: pingpong.c
+- Learnt to use pipe system call
+- I ran into some bugs when I used fstat on a fd associated with pipes and you should not do this
+
+### System Calls
+I learnt about how to make my own system calls and used gdb when analysing code running on the kernel
+
+**Using gdb**
+- Created breakpoints, watchpoints and used other gdb functions to figure out the cause of behaviours of various parts of code
+
+**Sandbox**
+- Files: sysfile.c(sys_interpose function), sandbox.c
+- Created a system call interpose
+- I now understand why you pass an flag1|flag2|flag3... into OPEN because a bit is associated with each flag and that's how you decide whether to include flag in code for open
+- Understood how system calls are run or called in xv6 so that I could actually stop the calls being run when mask was called
+- Hit a problem when I didn't copy masks from parent to child 
+- Learnt how to access arguments from registers
+
+**Memory Available System Call**
+- Files: sysfile.c(sys_memAvailable function), kalloc.c(count_free_bytes)
+- Learnt about how xv6 stores all the free physical pages in a freelist which is basically a stack
+- Iterate through list to calculate free memory
+
+**Attack xv6**
+- Files: attack.c, secret.c
+- Created a bug in xv6 system(not wiping out the data from freed page)
+- Used sbrk() system call to grow memory and match some text in the memory
+- Dealt with a bug where first 8 bytes would be overwritten by free to store next pointer so matching for whole string would result in problems
+
 
 
 
