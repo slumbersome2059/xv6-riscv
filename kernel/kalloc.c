@@ -52,8 +52,7 @@ kfree(void *pa)
     panic("kfree");
 
   // Fill with junk to catch dangling refs.
-  //change after attack xv6 done
-  //memset(pa, 1, PGSIZE);
+  memset(pa, 1, PGSIZE);
 
   r = (struct run *)pa;
 
@@ -77,9 +76,9 @@ kalloc(void)
     kmem.freelist = r->next;
   release(&kmem.lock);
 
-  //modified just for attack xv6 - take it away later
-  //if (r)
-    //memset((char *)r, 5, PGSIZE); // fill with junk
+  
+  if (r)
+    memset((char *)r, 5, PGSIZE); // fill with junk
   return (void *)r;
 }
 
